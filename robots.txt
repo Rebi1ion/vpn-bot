@@ -1,0 +1,13 @@
+User-agent: *
+Allow: /
+Allow: /images/
+
+Disallow: /api/
+Disallow: /sessions/
+Disallow: /logs/
+Disallow: /backup/
+Disallow: /backups/
+Disallow: /venv/
+Disallow: /__pycache__/
+
+Sitemap: https://free-vless-vpn.mooo.com/sitemap.xml

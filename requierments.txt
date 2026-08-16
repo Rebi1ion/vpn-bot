@@ -1,0 +1,10 @@
+aiogram==3.13.1
+aiohttp==3.10.5
+python-dotenv==1.0.1
+pydantic-settings==2.5.2
+sqlalchemy==2.0.35
+aiosqlite==0.20.0
+py3xui>=0.5.0
+psutil==6.1.0
+openpyxl==3.1.2
+PyJWT>=2.8.0

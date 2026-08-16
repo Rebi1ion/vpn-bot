@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Бесплатный VPN для Telegram — обход блокировок за 1 минуту | VPN VLESS</title>
+    <meta name="description"
+        content="Не работает Телеграм? Бесплатный VPN на 1 час для обхода блокировок в России. Быстрый доступ без регистрации — VPN VLESS для Telegram за 60 секунд.">
+    <meta name="keywords"
+        content="не работает телеграм, обход блокировок, бесплатный VPN на час, VPN для телеграм, быстрый доступ, vpn для телеграмма, vpn россия, vless vpn бесплатно">
+    <link rel="canonical" href="https://free-vless-vpn.mooo.com/">
+
+    <!-- Open Graph (Telegram, VK, WhatsApp, Facebook) -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://free-vless-vpn.mooo.com/">
+    <meta property="og:title" content="🔓 Не работает Телеграм? Бесплатный VPN на 1 час">
+    <meta property="og:description"
+        content="Аварийный VPN без регистрации. Получи ключ VLESS за 60 секунд — зайди в Telegram и забери постоянную подписку.">
+    <meta property="og:image" content="https://free-vless-vpn.mooo.com/images/ad.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:locale" content="ru_RU">
+    <meta property="og:site_name" content="Free VLESS VPN">
+    <meta name="yandex-verification" content="ca250ff83c2dda43" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="🔓 Не работает Телеграм? Бесплатный VPN на 1 час">
+    <meta name="twitter:description"
+        content="Аварийный VPN без регистрации. Получи ключ VLESS за 60 секунд — зайди в Telegram и забери постоянную подписку.">
+    <meta name="twitter:image" content="https://free-vless-vpn.mooo.com/images/ad.png">
+
+    <!-- Schema.org JSON-LD -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Free VLESS VPN — бесплатный VPN для Telegram",
+        "description": "Бесплатный VPN-сервис на 1 час для обхода блокировок Telegram в России. Протокол VLESS, без регистрации, мгновенная выдача ключа.",
+        "url": "https://free-vless-vpn.mooo.com/",
+        "applicationCategory": "UtilitiesApplication",
+        "operatingSystem": "Android, iOS, Windows, macOS, Linux",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "RUB"
+        },
+        "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "4.8",
+            "ratingCount": "1524",
+            "bestRating": "5",
+            "worstRating": "1"
+        }
+    }
+    </script>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/images/favicon.png">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FingerprintJS -->
+    <script src="https://openfpcdn.io/fingerprintjs/v4"></script>
+    <!-- Cloudflare Turnstile -->
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+
+    <style>
+        body {
+            background-color: #0f172a;
+            color: #f8fafc;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        .vless-container {
+            word-break: break-all;
+        }
+    </style>
+</head>
+
+<body class="min-h-screen flex items-center justify-center p-4">
+    <div class="max-w-md w-full bg-slate-800 rounded-2xl shadow-xl overflow-hidden border border-slate-700">
+        <!-- Header -->
+        <header class="bg-gradient-to-r from-blue-600 to-indigo-600 p-6 text-center">
+            <h1 class="text-2xl font-bold text-white mb-2">Бесплатный VPN для Telegram — обход блокировок</h1>
+            <h2 class="text-blue-100 text-sm">Экстренный доступ на 1 час без регистрации. Быстрый VPN VLESS для
+                обхода блокировок в РФ</h2>
+        </header>
+
+        <!-- Content -->
+        <main class="p-6">
+            <!-- Начальный блок -->
+            <div id="initial-state" class="flex flex-col items-center">
+                <p class="text-slate-300 text-center mb-6 text-sm">
+                    Этот VPN-ключ выдается разово для того, чтобы вы смогли зайти в Telegram и получить постоянный
+                    тариф.
+                    <br><br>
+                    <span class="text-yellow-400 font-medium">Ключ будет автоматически удален ровно через 60
+                        минут!</span>
+                </p>
+
+                <!-- Ошибка отображения -->
+                <div id="error-message"
+                    class="hidden w-full mb-4 p-3 bg-red-900/50 border border-red-500 rounded-lg text-red-200 text-sm text-center">
+                </div>
+
+                <!-- Turnstile Widget -->
+                <div class="cf-turnstile mb-6" data-sitekey="0x4AAAAAACoaenXPsOi7UxFx" data-theme="dark"></div>
+
+                <button id="get-vpn-btn"
+                    class="w-full bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-3 px-4 rounded-xl transition duration-200 transform hover:scale-105 shadow-lg flex justify-center items-center">
+                    <span id="btn-text">Получить VPN на 1 час</span>
+                    <svg id="btn-loader" class="hidden animate-spin -ml-1 mr-3 h-5 w-5 text-white absolute"
+                        xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4">
+                        </circle>
+                        <path class="opacity-75" fill="currentColor"
+                            d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z">
+                        </path>
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Блок успеха -->
+            <div id="success-state" class="hidden flex-col items-center">
+                <div
+                    class="w-16 h-16 bg-green-500 rounded-full flex justify-center items-center mb-4 shadow-lg shadow-green-500/30">
+                    <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                </div>
+
+                <h2 class="text-xl font-bold text-green-400 mb-2">VPN успешно создан!</h2>
+
+                <div class="text-center mb-6">
+                    <p class="text-slate-400 text-sm mb-1">Время до отключения:</p>
+                    <div id="timer" class="text-4xl font-mono text-white font-bold tracking-wider">60:00</div>
+                </div>
+
+                <div class="w-full bg-slate-900 rounded-lg p-3 mb-4 border border-slate-700 vless-container">
+                    <p id="vless-link" class="text-xs text-slate-400 font-mono h-24 overflow-y-auto w-full select-all">
+                        Здесь появится ссылка...
+                    </p>
+                </div>
+
+                <button id="copy-btn"
+                    class="w-full bg-slate-700 hover:bg-slate-600 text-white font-semibold py-2 px-4 rounded-lg transition mb-3 flex justify-center items-center gap-2">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3">
+                        </path>
+                    </svg>
+                    <span>Скопировать ссылку</span>
+                </button>
+
+                <!-- Кнопка «Поделиться с другом» -->
+                <button id="share-btn"
+                    class="w-full bg-sky-600 hover:bg-sky-500 text-white font-semibold py-2 px-4 rounded-lg transition mb-6 flex justify-center items-center gap-2">
+                    <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="18" cy="5" r="3"></circle>
+                        <circle cx="6" cy="12" r="3"></circle>
+                        <circle cx="18" cy="19" r="3"></circle>
+                        <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
+                        <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
+                    </svg>
+                    <span>Поделиться с другом</span>
+                </button>
+
+                <div class="bg-blue-900/30 border border-blue-800 rounded-lg p-4 text-center mb-6">
+                    <h3 class="text-blue-400 font-bold mb-2">🔥 Что делать дальше?</h3>
+                    <p class="text-slate-300 text-sm mb-3">
+                        ⚠️ <b>Важно:</b> Второй раз получить тестовый ключ нельзя<br><br>
+                        Срочно включите VPN по инструкции ниже, зайдите в Telegram и запустите нашего бота, чтобы
+                        оформить постоянную подписку.
+                    </p>
+                    <a href="https://t.me/free_v1ess_vpn_bot" target="_blank"
+                        class="inline-block bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 px-4 rounded-lg w-full transition text-center shadow">
+                        Перейти в Telegram-бота
+                    </a>
+                </div>
+
+                <!-- Инструкция -->
+                <section class="w-full bg-slate-900 rounded-lg p-5 mb-6 border border-slate-700 text-left">
+                    <h3 class="text-lg font-bold text-white mb-4 flex items-center gap-2">
+                        <span>📖</span> Инструкция по настройке VPN
+                    </h3>
+
+                    <div class="space-y-6 text-sm text-slate-300">
+                        <!-- Шаг 1 -->
+                        <div class="border-l-2 border-indigo-500 pl-4">
+                            <p class="font-bold text-white mb-2 text-base">Шаг 1. Скачай приложение Hiddify</p>
+                            <div class="flex flex-col gap-3 mb-3">
+                                <a href="https://apps.apple.com/us/app/hiddify-proxy-vpn/id6596777532" target="_blank"
+                                    class="flex items-center gap-3 text-indigo-400 hover:text-indigo-300"><span
+                                        class="bg-slate-800 p-1.5 rounded-lg">📱</span> App Store (iOS)</a>
+                                <a href="https://play.google.com/store/apps/details?id=app.hiddify.com" target="_blank"
+                                    class="flex items-center gap-3 text-indigo-400 hover:text-indigo-300"><span
+                                        class="bg-slate-800 p-1.5 rounded-lg">🤖</span> Google Play (Android)</a>
+                                <a href="https://github.com/hiddify/hiddify-next/releases" target="_blank"
+                                    class="flex items-center gap-3 text-indigo-400 hover:text-indigo-300"><span
+                                        class="bg-slate-800 p-1.5 rounded-lg">💻</span> GitHub (Win/Mac/Linux)</a>
+                            </div>
+                            <p class="text-xs text-slate-400">Или любой другой клиент, поддерживающий протокол VLESS.
+                            </p>
+                            <img src="/images/1.jpg"
+                                class="rounded-lg w-full object-cover border border-slate-700 opacity-90 shadow-md mt-3"
+                                alt="Скачивание приложения Hiddify для настройки VLESS VPN — обход блокировок Telegram"
+                                loading="lazy">
+                        </div>
+
+                        <!-- Шаг 2 -->
+                        <div class="border-l-2 border-indigo-500 pl-4">
+                            <p class="font-bold text-white mb-2 text-base">Шаг 2. Добавь конфиг</p>
+                            <ul class="list-disc pl-4 space-y-1 mb-3">
+                                <li>Скопируй конфиг по кнопке выше</li>
+                                <li>Открой приложение Hiddify</li>
+                                <li>Нажми кнопку <b>«+»</b> (плюс)</li>
+                                <li>Выбери <b>«Добавить из буфера обмена»</b></li>
+                            </ul>
+                            <img src="/images/2.jpg"
+                                class="rounded-lg w-full object-cover border border-slate-700 opacity-90 shadow-md"
+                                alt="Добавление VLESS конфига в Hiddify — вставка ключа из буфера обмена"
+                                loading="lazy">
+                        </div>
+
+                        <!-- Шаг 3 -->
+                        <div class="border-l-2 border-indigo-500 pl-4">
+                            <p class="font-bold text-white mb-2 text-base">Шаг 3. Настрой приложение (для Hiddify)</p>
+                            <ul class="list-disc pl-4 space-y-1 mb-3">
+                                <li>Рядом с кнопкой «+» нажми на <b>⚙️ Настройки</b></li>
+                                <li>Выбери режим: <b>VPN</b></li>
+                                <li>В дополнительных настройках укажи регион: <b>Другой</b></li>
+                            </ul>
+                            <div class="grid grid-cols-2 gap-2 mt-3">
+                                <img src="/images/3.jpg"
+                                    class="rounded-lg w-full object-cover border border-slate-700 opacity-90 shadow-md"
+                                    alt="Настройка режима VPN в приложении Hiddify для обхода блокировок"
+                                    loading="lazy">
+                                <img src="/images/4.jpg"
+                                    class="rounded-lg w-full object-cover border border-slate-700 opacity-90 shadow-md"
+                                    alt="Выбор региона в Hiddify — настройка VPN VLESS для доступа к Telegram"
+                                    loading="lazy">
+                            </div>
+                        </div>
+
+                        <!-- Шаг 4 -->
+                        <div class="border-l-2 border-indigo-500 pl-4">
+                            <p class="font-bold text-white mb-2 text-base">Шаг 4. Готово!</p>
+                            <ul class="list-disc pl-4 space-y-1 mb-3">
+                                <li>Нажми крупную кнопку подключения в центре</li>
+                                <li>Разреши создание VPN профиля (при первом запуске)</li>
+                                <li>Пользуйся интернетом без ограничений! 🚀</li>
+                            </ul>
+                            <div class="grid grid-cols-2 gap-2 mt-3">
+                                <img src="/images/5.jpg"
+                                    class="rounded-lg w-full object-cover border border-slate-700 opacity-90 shadow-md"
+                                    alt="Подключение к VPN через Hiddify — кнопка запуска VLESS-VPN" loading="lazy">
+                                <img src="/images/6.jpg"
+                                    class="rounded-lg w-full object-cover border border-slate-700 opacity-90 shadow-md"
+                                    alt="Успешное подключение VPN — Telegram и интернет работают без блокировок"
+                                    loading="lazy">
+                            </div>
+                        </div>
+
+                    </div>
+                </section>
+
+
+            </div>
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            const btn = document.getElementById('get-vpn-btn');
+            const btnText = document.getElementById('btn-text');
+            const btnLoader = document.getElementById('btn-loader');
+            const errorBox = document.getElementById('error-message');
+
+            const initialState = document.getElementById('initial-state');
+            const successState = document.getElementById('success-state');
+            const vlessLinkElem = document.getElementById('vless-link');
+            const copyBtn = document.getElementById('copy-btn');
+            const shareBtn = document.getElementById('share-btn');
+            const timerElem = document.getElementById('timer');
+
+            // 1. Инициализация FingerprintJS
+            let fpPromise;
+            try {
+                fpPromise = fpPromise || window.fpPromise || await window.FingerprintJS.load();
+            } catch (e) {
+                console.warn("FingerprintJS load error (maybe adblock):", e);
+            }
+
+            async function getFingerprint() {
+                let fingerprint = "unknown";
+                if (fpPromise) {
+                    try {
+                        const result = await fpPromise.get();
+                        fingerprint = result.visitorId;
+                    } catch (fpError) {
+                        fingerprint = generateFallbackFingerprint();
+                    }
+                } else {
+                    fingerprint = generateFallbackFingerprint();
+                }
+                return fingerprint;
+            }
+
+            function generateFallbackFingerprint() {
+                try {
+                    // Компактный fallback-алгоритм (Canvas + WebGL + Screen)
+                    const canvas = document.createElement('canvas');
+                    const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+                    // WebGL: Вместо названия видеокарты (которое разные браузеры отдают по-разному или скрывают)
+                    // берем точную версию WebGL и шейдеров, которые зависят от видеочипа, а не от браузера.
+                    let webglInfo = '';
+                    if (gl) {
+                        webglInfo = gl.getParameter(gl.VERSION) + '|' + gl.getParameter(gl.SHADING_LANGUAGE_VERSION);
+                    }
+
+                    // Экраны могут отдавать разную ширину/высоту из-за панелей вкладок в разных браузерах (особенно на мобильных).
+                    // Поэтому берем самое большое число как X, а меньшее как Y, и добавляем глубину цвета.
+                    const w = window.screen.width || 0;
+                    const h = window.screen.height || 0;
+                    const maxDim = Math.max(w, h);
+                    const minDim = Math.min(w, h);
+                    const screenInfo = `${maxDim}x${minDim}x${window.screen.colorDepth}`;
+
+                    const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+
+                    // Ядра и память часто ограничиваются браузерами (Safari отдает не так как Chrome).
+                    // Мы их не используем для большей кросс-браузерности на одном устройстве.
+                    const rawData = [
+                        screenInfo,
+                        tz,
+                        webglInfo
+                    ].join('|');
+
+                    return djb2Hash(rawData);
+                } catch (e) {
+                    const tzFallback = Intl.DateTimeFormat().resolvedOptions().timeZone || 'unknown';
+                    const w = window.screen ? window.screen.width : 0;
+                    const h = window.screen ? window.screen.height : 0;
+                    return btoa(Math.max(w, h) + "x" + Math.min(w, h) + tzFallback).substring(0, 32);
+                }
+            }
+
+            // Простой и быстрый хеш алгоритм djb2
+            function djb2Hash(str) {
+                let hash = 5381;
+                for (let i = 0; i < str.length; i++) {
+                    hash = ((hash << 5) + hash) + str.charCodeAt(i);
+                }
+                return hash.toString(16) + str.length.toString(16);
+            }
+
+            // Функция восстановления сессии
+            (async function checkSession() {
+                try {
+                    const fingerprint = await getFingerprint();
+                    const response = await fetch('/api/trial/check', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ fingerprint: fingerprint })
+                    });
+                    const data = await response.json();
+                    if (data.active) {
+                        showSuccess(data.url, data.expires_at);
+                    }
+                } catch (e) {
+                    console.error("Session check failed", e);
+                }
+            })();
+
+            // Обработка кнопки
+            btn.addEventListener('click', async () => {
+                // Скрываем прошлую ошибку
+                errorBox.classList.add('hidden');
+
+                // Получаем Cloudflare Turnstile token
+                const turnstileToken = document.querySelector('[name="cf-turnstile-response"]')?.value;
+                if (!turnstileToken) {
+                    showError("Пожалуйста, пройдите проверку");
+                    return;
+                }
+
+                // Включаем загрузку
+                btn.disabled = true;
+                btnText.classList.add('hidden');
+                btnLoader.classList.remove('hidden');
+
+                try {
+                    // Получаем Fingerprint
+                    const fingerprint = await getFingerprint();
+
+                    // Отправляем запрос на сервер
+                    const response = await fetch('/api/trial', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            turnstile_token: turnstileToken,
+                            fingerprint: fingerprint
+                        })
+                    });
+
+                    const data = await response.json();
+
+                    if (!response.ok) {
+                        throw new Error(data.error || 'Ошибка сервера. Попробуйте позже.');
+                    }
+
+                    // УСПЕХ!
+                    showSuccess(data.url);
+
+                } catch (error) {
+                    showError(error.message);
+                } finally {
+                    // Выключаем загрузку (если не форма успеха)
+                    btn.disabled = false;
+                    btnLoader.classList.add('hidden');
+                    btnText.classList.remove('hidden');
+                    // Сбрасываем Turnstile (чтобы юзер мог попробовать еще раз)
+                    try { window.turnstile.reset(); } catch (e) { }
+                }
+            });
+
+            // Копирование ссылки
+            copyBtn.addEventListener('click', () => {
+                navigator.clipboard.writeText(vlessLinkElem.textContent.trim()).then(() => {
+                    const origText = copyBtn.innerHTML;
+                    copyBtn.innerHTML = `
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                        <span>Скопировано!</span>
+                    `;
+                    copyBtn.classList.replace('bg-slate-700', 'bg-green-600');
+                    copyBtn.classList.replace('hover:bg-slate-600', 'hover:bg-green-500');
+                    setTimeout(() => {
+                        copyBtn.innerHTML = origText;
+                        copyBtn.classList.replace('bg-green-600', 'bg-slate-700');
+                        copyBtn.classList.replace('hover:bg-green-500', 'hover:bg-slate-600');
+                    }, 3000);
+                });
+            });
+
+            // Поделиться с другом
+            shareBtn.addEventListener('click', async () => {
+                const shareText = '🔓 Не работает Телеграм? Вот аварийный VPN на 1 час без регистрации, чтобы зайти и забрать вечный ключ:\nhttps://free-vless-vpn.mooo.com/';
+                const shareData = {
+                    title: 'Бесплатный VPN для Telegram',
+                    text: shareText,
+                    url: 'https://free-vless-vpn.mooo.com/'
+                };
+
+                try {
+                    if (navigator.share) {
+                        await navigator.share(shareData);
+                    } else {
+                        // Fallback для ПК — копируем виральный текст в буфер
+                        await navigator.clipboard.writeText(shareText);
+                        const origHTML = shareBtn.innerHTML;
+                        shareBtn.innerHTML = `
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            <span>Текст скопирован — отправь другу!</span>
+                        `;
+                        shareBtn.classList.replace('bg-sky-600', 'bg-green-600');
+                        shareBtn.classList.replace('hover:bg-sky-500', 'hover:bg-green-500');
+                        setTimeout(() => {
+                            shareBtn.innerHTML = origHTML;
+                            shareBtn.classList.replace('bg-green-600', 'bg-sky-600');
+                            shareBtn.classList.replace('hover:bg-green-500', 'hover:bg-sky-500');
+                        }, 3000);
+                    }
+                } catch (e) {
+                    // Пользователь отменил шаринг или ошибка — игнорируем
+                    console.log('Share cancelled or failed:', e);
+                }
+            });
+
+            function showError(msg) {
+                errorBox.textContent = msg;
+                errorBox.classList.remove('hidden');
+            }
+
+            function showSuccess(url, expiresAtStr = null) {
+                initialState.classList.add('hidden');
+                successState.classList.remove('hidden');
+                successState.classList.add('flex');
+
+                vlessLinkElem.textContent = url;
+
+                let remainingSeconds = 60 * 60;
+                if (expiresAtStr) {
+                    const expiresAt = new Date(expiresAtStr).getTime();
+                    const now = new Date().getTime();
+                    remainingSeconds = Math.max(0, Math.floor((expiresAt - now) / 1000));
+                }
+
+                // Запускаем таймер
+                startTimer(remainingSeconds);
+            }
+
+            function startTimer(durationSeconds) {
+                let timer = durationSeconds;
+                setInterval(() => {
+                    if (timer <= 0) {
+                        timerElem.textContent = "00:00";
+                        timerElem.classList.replace('text-white', 'text-red-500');
+                        return;
+                    }
+
+                    minutes = parseInt(timer / 60, 10);
+                    seconds = parseInt(timer % 60, 10);
+
+                    minutes = minutes < 10 ? "0" + minutes : minutes;
+                    seconds = seconds < 10 ? "0" + seconds : seconds;
+
+                    timerElem.textContent = minutes + ":" + seconds;
+
+                    if (timer < 300) { // Меньше 5 минут - краснеет
+                        timerElem.classList.replace('text-white', 'text-red-400');
+                    }
+
+                    timer -= 1;
+                }, 1000);
+            }
+        });
+    </script>
+</body>
+
+</html>

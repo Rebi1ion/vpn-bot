@@ -1,0 +1,10 @@
+.env
+*.db
+__pycache__/
+.venv/
+venv/
+sessions/
+logs/
+backups/
+*.rar
+vless*.txt
